@@ -4,6 +4,8 @@ import com.dan.data.springdataexample.repository.StudentRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -55,5 +57,22 @@ public class StudentTests {
         repo.findStudentsPartialData().forEach(objects -> {
             System.out.println(objects[0] + "\t" + objects[1]);
         });
+    }
+
+    @Test
+    void getStudentByFirstName() {
+        repo.getStudentByFirstName("Daisy").forEach(System.out::println);
+    }
+
+    @Test
+    void getStudentsInScoreRange() {
+        repo.getStudentsInScoreRange(79, 81).forEach(System.out::println);
+    }
+
+    @Test
+    @Transactional
+    @Rollback(value = false)
+    void deleteStudentsByFirstName() {
+        repo.deleteStudentsByFirstName("Adriana");
     }
 }
