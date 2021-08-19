@@ -31,4 +31,6 @@ public interface StudentRepository extends CrudRepository<Student, Integer> {
 
     @Query(value = "select * from student where fname like :fName%", nativeQuery = true)
     List<Student> findAllStudentsWithFirstNameLikeNative(@Param("fName") String firstName);
+
+    long countByASampleFirstName(String firstName);
 }

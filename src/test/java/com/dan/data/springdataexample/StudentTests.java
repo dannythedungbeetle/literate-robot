@@ -92,4 +92,10 @@ public class StudentTests {
     void findAllNative() {
         repo.findAllStudentsWithFirstNameLikeNative("Jo").forEach(System.out::println);
     }
+
+    @Test
+    public void countTest() {
+        long count = repo.countByASampleFirstName("Danamananakjdj");
+        System.out.println(count);
+    }
 }

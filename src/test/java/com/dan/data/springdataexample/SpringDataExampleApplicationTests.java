@@ -5,6 +5,7 @@ import com.dan.data.springdataexample.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -96,5 +97,16 @@ class SpringDataExampleApplicationTests {
     @Test
     public void findByIdInExample() {
         productRepository.findByIdIn(Arrays.asList(1, 2, 3)).forEach(System.out::println);
+    }
+
+    @Test
+    @Transactional
+    public void testCaching() {
+        Optional<Product> byId = productRepository.findById(1);
+        if (byId.isPresent()) {
+            System.out.println(byId);
+        }
+        productRepository.findById(1);
+        productRepository.findById(1);
     }
 }

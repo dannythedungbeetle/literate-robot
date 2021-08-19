@@ -1,10 +1,13 @@
-package com.dan.data.springdataexample.entities;
+package com.dan.data.springdataexample.entities.inheritancesuper;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Payment {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class SuperPayment {
     @Id
     private int id;
     private double amount;
